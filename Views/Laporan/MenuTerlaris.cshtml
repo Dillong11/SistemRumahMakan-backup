@@ -1,0 +1,103 @@
+@model List<SistemRumahMakan.Models.ViewModels.TopMenuVM>
+
+@{
+    ViewData["Title"] = "Menu Terlaris";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h3>Top Menu Terlaris</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-striped">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Ranking</th>
+
+                        <th>Nama Menu</th>
+
+                        <th>Total Terjual</th>
+
+                        <th>Progress</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int rank = 1;
+                        int max = Model.Any() ? Model.Max(x => x.TotalTerjual) : 1;
+                    }
+
+                    @foreach(var item in Model)
+                    {
+                        var persen = (item.TotalTerjual * 100) / max;
+
+                        <tr>
+
+                            <td>
+
+                                @if(rank==1)
+                                {
+                                    <span class="badge bg-warning">TOP 1</span>
+                                }
+                                else if(rank==2)
+                                {
+                                    <span class="badge bg-secondary">TOP 2</span>
+                                }
+                                else if(rank==3)
+                                {
+                                    <span class="badge bg-success">TOP 3</span>
+                                }
+                                else
+                                {
+                                    @rank
+                                }
+
+                            </td>
+
+                            <td>@item.NamaMenu</td>
+
+                            <td>@item.TotalTerjual</td>
+
+                            <td>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar bg-success"
+                                         style="width:@persen%">
+
+                                        @persen%
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        rank++;
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

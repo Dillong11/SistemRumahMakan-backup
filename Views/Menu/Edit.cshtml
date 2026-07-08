@@ -1,0 +1,74 @@
+@model SistemRumahMakan.Models.Menu
+
+@{
+    ViewData["Title"] = "Edit Menu";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h4>Edit Menu</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create" method="post">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Nama Menu
+
+                    </label>
+
+                    <input asp-for="NamaMenu    "
+                           class="form-control" />
+
+                    <span asp-validation-for="NamaMenu"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Deskripsi
+
+                    </label>
+
+                    <textarea asp-for="Deskripsi"
+                              class="form-control">
+                    </textarea>
+
+                </div>
+
+                <button class="btn btn-success">
+
+                    Update
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Kembali
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}

@@ -1,0 +1,144 @@
+@model SistemRumahMakan.Models.OrderHeader
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Detail Transaksi";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4>Detail Transaksi</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <th width="35%">Nomor Order</th>
+                            <td>: @Model.NomorOrder</td>
+                        </tr>
+
+                        <tr>
+                            <th>Tanggal</th>
+                            <td>: @Model.Tanggal.ToString("dd MMMM yyyy HH:mm")</td>
+                        </tr>
+
+                        <tr>
+                            <th>Meja</th>
+                            <td>: @Model.Meja?.NomorMeja</td>
+                        </tr>
+
+                        <tr>
+                            <th>Status</th>
+                            <td>: @Model.Status</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <h5>Daftar Pesanan</h5>
+
+            <table class="table table-bordered">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>No</th>
+                        <th>Menu</th>
+                        <th>Harga</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach(var item in Model.Details!)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+
+                            <td>@item.Menu?.NamaMenu</td>
+
+                            <td>
+                                @item.Harga.ToString("C0", new CultureInfo("id-ID"))
+                            </td>
+
+                            <td>@item.Qty</td>
+
+                            <td>
+                                @item.Subtotal.ToString("C0", new CultureInfo("id-ID"))
+                            </td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+
+                        <th colspan="4" class="text-end">
+
+                            Grand Total
+
+                        </th>
+
+                        <th>
+
+                            @Model.Total.ToString("C0", new CultureInfo("id-ID"))
+
+                        </th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                Kembali
+
+            </a>
+
+            <a asp-action="Print"
+               asp-route-id="@Model.Id"
+               class="btn btn-success">
+
+                Cetak PDF
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Laporan";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>Menu Laporan</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <a asp-action="Harian"
+                       class="btn btn-success w-100 p-4">
+
+                        <h4>Laporan Harian</h4>
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-action="Bulanan"
+                       class="btn btn-warning w-100 p-4">
+
+                        <h4>Laporan Bulanan</h4>
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-action="MenuTerlaris"
+                       class="btn btn-danger w-100 p-4">
+
+                        <h4>Menu Terlaris</h4>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

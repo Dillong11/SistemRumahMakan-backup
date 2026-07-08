@@ -1,0 +1,167 @@
+@model SistemRumahMakan.Models.ViewModels.OrderCreateVM
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Transaksi";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4>Transaksi Pemesanan</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- FORM TAMBAH MENU -->
+
+            <form asp-action="AddToCart" method="post">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">Meja</label>
+
+                        <select asp-for="MejaId" asp-items="ViewBag.Meja" class="form-select">
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">Menu</label>
+
+                        <select asp-for="MenuId" asp-items="ViewBag.Menu" class="form-select">
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <label class="form-label">Qty</label>
+
+                        <input asp-for="Qty" class="form-control" />
+
+                    </div>
+
+                    <div class="col-md-2 d-flex align-items-end">
+
+                        <button class="btn btn-primary w-100">
+
+                            Tambah
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <hr />
+
+            <!-- TABEL KERANJANG -->
+
+            <h4>Keranjang</h4>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Menu</th>
+                        <th>Harga</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Aksi</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+
+                            <td>@item.NamaMenu</td>
+
+                            <td>
+                                @item.Harga.ToString("C0", new CultureInfo("id-ID"))
+                            </td>
+
+                            <td>@item.Qty</td>
+
+                            <td>
+                                @item.Subtotal.ToString("C0", new CultureInfo("id-ID"))
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Remove" asp-route-id="@item.MenuId" class="btn btn-danger btn-sm">
+
+                                    Hapus
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+
+                        <th colspan="3" class="text-end">
+
+                            Grand Total
+
+                        </th>
+
+                        <th>
+
+                            @Model.GrandTotal.ToString("C0", new CultureInfo("id-ID"))
+
+                        </th>
+
+                        <th></th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+            <!-- SIMPAN TRANSAKSI -->
+
+            <form asp-action="Save" method="post">
+
+                <input type="hidden" name="MejaId" value="@Model.MejaId" />
+
+                <button class="btn btn-success btn-lg">
+                    Simpan Transaksi
+                </button>
+
+            </form>
+
+        
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,36 @@
+@model SistemRumahMakan.Models.Meja
+
+<form asp-action="Create" method="post">
+
+    <div class="mb-3">
+        <label asp-for="NomorMeja"></label>
+        <input asp-for="NomorMeja" class="form-control"/>
+        <span asp-validation-for="NomorMeja" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Kapasitas"></label>
+        <input asp-for="Kapasitas" class="form-control"/>
+        <span asp-validation-for="Kapasitas" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status"></label>
+
+        <select asp-for="Status" class="form-select">
+            <option value="Kosong">Kosong</option>
+            <option value="Terisi">Terisi</option>
+            <option value="Reservasi">Reservasi</option>
+        </select>
+    </div>
+
+    <button class="btn btn-success">
+        Simpan
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Kembali
+    </a>
+
+</form>

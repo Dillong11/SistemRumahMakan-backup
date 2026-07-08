@@ -1,0 +1,153 @@
+@model SistemRumahMakan.Models.ViewModels.LaporanVM
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Laporan Bulanan";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning text-dark">
+
+            <h3>Laporan Bulanan</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="get" asp-action="Bulanan">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <label>Bulan</label>
+
+                        <select name="bulan" class="form-select">
+
+                            @for(int i=1;i<=12;i++)
+                            {
+                                if(Model.TanggalAwal?.Month==i)
+                                {
+                                    <option value="@i" selected>@i</option>
+                                }
+                                else
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Tahun</label>
+
+                        <input type="number"
+                               name="tahun"
+                               class="form-control"
+                               value="@(Model.TanggalAwal?.Year ?? DateTime.Now.Year)"/>
+
+                    </div>
+
+                    <div class="col-md-2 mt-4">
+
+                        <button class="btn btn-primary">
+
+                            Filter
+
+                        </button>
+
+                    </div>
+
+                    <div class="col-md-2 mt-4">
+
+                        <a asp-action="Cetak"
+                           asp-route-tanggalAwal="@Model.TanggalAwal?.ToString("yyyy-MM-dd")"
+                           asp-route-tanggalAkhir="@Model.TanggalAkhir?.ToString("yyyy-MM-dd")"
+                           class="btn btn-danger">
+
+                            PDF
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <hr/>
+
+            <table class="table table-bordered table-striped">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>No</th>
+                        <th>No Order</th>
+                        <th>Tanggal</th>
+                        <th>Meja</th>
+                        <th>Status</th>
+                        <th>Total</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach(var item in Model.Orders)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+                            <td>@item.NomorOrder</td>
+                            <td>@item.Tanggal.ToString("dd/MM/yyyy")</td>
+                            <td>@item.Meja?.NomorMeja</td>
+                            <td>@item.Status</td>
+                            <td>@item.Total.ToString("C0",new CultureInfo("id-ID"))</td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+                <tfoot class="table-warning">
+
+                    <tr>
+
+                        <th colspan="5" class="text-end">
+
+                            Grand Total
+
+                        </th>
+
+                        <th>
+
+                            @Model.GrandTotal.ToString("C0",new CultureInfo("id-ID"))
+
+                        </th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

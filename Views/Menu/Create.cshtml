@@ -1,0 +1,122 @@
+@model SistemRumahMakan.Models.Menu
+
+@{
+    ViewData["Title"] = "Tambah Menu";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+            <h4>Tambah Menu</h4>
+        </div>
+
+        <div class="card-body">
+
+            <<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                <!-- Kategori -->
+
+                <div class="mb-3">
+                    <label asp-for="KategoriMenuId" class="form-label">
+                        Kategori
+                    </label>
+
+                    <select asp-for="KategoriMenuId" asp-items="ViewBag.Kategori" class="form-select">
+                        <option value="">-- Pilih Kategori --</option>
+                    </select>
+
+                    <span asp-validation-for="KategoriMenuId" class="text-danger"></span>
+                </div>
+
+                <!-- Nama Menu -->
+
+                <div class="mb-3">
+                    <label asp-for="NamaMenu" class="form-label"></label>
+
+                    <input asp-for="NamaMenu" class="form-control" />
+
+                    <span asp-validation-for="NamaMenu" class="text-danger"></span>
+                </div>
+
+                <!-- Harga -->
+
+                <div class="mb-3">
+                    <label asp-for="Harga" class="form-label"></label>
+
+                    <input asp-for="Harga" class="form-control" />
+
+                    <span asp-validation-for="Harga" class="text-danger"></span>
+                </div>
+
+                <!-- Stok -->
+
+                <div class="mb-3">
+                    <label asp-for="Stok" class="form-label"></label>
+
+                    <input asp-for="Stok" class="form-control" />
+
+                    <span asp-validation-for="Stok" class="text-danger"></span>
+                </div>
+
+                <!-- Deskripsi -->
+
+                <div class="mb-3">
+                    <label asp-for="Deskripsi" class="form-label"></label>
+
+                    <textarea asp-for="Deskripsi" class="form-control" rows="4">
+                    </textarea>
+
+                    <span asp-validation-for="Deskripsi" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Foto Menu
+
+                    </label>
+
+                    <input asp-for="FotoFile" class="form-control" accept="image/*" />
+
+                </div>
+
+                <!-- Status -->
+
+                <div class="form-check form-switch mb-4">
+
+                    <input asp-for="Status" class="form-check-input" />
+
+                    <label asp-for="Status" class="form-check-label">
+                        Menu Tersedia
+                    </label>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">
+
+                    Simpan
+
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+
+                    Kembali
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,377 @@
+@model SistemRumahMakan.Models.ViewModels.DashboardVM
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-0">
+                Dashboard Sistem Rumah Makan
+            </h2>
+
+            <small class="text-muted">
+                Selamat datang di Sistem Informasi Rumah Makan
+            </small>
+        </div>
+
+        <div class="text-end">
+
+            <h5 class="mb-0">
+                @DateTime.Now.ToString("dddd", new CultureInfo("id-ID"))
+            </h5>
+
+            <small>
+                @DateTime.Now.ToString("dd MMMM yyyy", new CultureInfo("id-ID"))
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- CARD -->
+
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card shadow border-0 bg-primary text-white">
+
+                <div class="card-body">
+
+                    <h6>Total Menu</h6>
+
+                    <h2 class="fw-bold">
+
+                        @Model.TotalMenu
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card shadow border-0 bg-success text-white">
+
+                <div class="card-body">
+
+                    <h6>Total Kategori</h6>
+
+                    <h2 class="fw-bold">
+
+                        @Model.TotalKategori
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card shadow border-0 bg-warning text-dark">
+
+                <div class="card-body">
+
+                    <h6>Total Meja</h6>
+
+                    <h2 class="fw-bold">
+
+                        @Model.TotalMeja
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card shadow border-0 bg-danger text-white">
+
+                <div class="card-body">
+
+                    <h6>Order Hari Ini</h6>
+
+                    <h2 class="fw-bold">
+
+                        @Model.OrderHariIni
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PENDAPATAN -->
+
+    <div class="row">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+
+                    Pendapatan Hari Ini
+
+                </div>
+
+                <div class="card-body">
+
+                    <h2 class="text-success">
+
+                        @Model.PendapatanHariIni.ToString("C0", new CultureInfo("id-ID"))
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    Pendapatan Bulan Ini
+
+                </div>
+
+                <div class="card-body">
+
+                    <h2 class="text-primary">
+
+                        @Model.PendapatanBulanIni.ToString("C0", new CultureInfo("id-ID"))
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- STATUS DAN GRAFIK -->
+
+    <div class="row">
+
+        <div class="col-lg-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header">
+
+                    Status Order
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+
+                            <th>Order Proses</th>
+
+                            <td>
+
+                                @Model.OrderProses
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>Order Selesai</th>
+
+                            <td>
+
+                                @Model.OrderSelesai
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-8 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-header">
+
+                    Grafik Pendapatan
+
+                </div>
+
+                <div class="card-body">
+
+                    <canvas id="salesChart" height="120"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TOP MENU -->
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-warning">
+
+                    Top 5 Menu Terlaris
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-striped table-hover">
+
+                        <thead class="table-dark">
+
+                            <tr>
+
+                                <th>No</th>
+
+                                <th>Nama Menu</th>
+
+                                <th>Total Terjual</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @if (Model.TopMenus.Any())
+                            {
+                                int no = 1;
+
+                                foreach (var item in Model.TopMenus)
+                                {
+                                    <tr>
+
+                                        <td>@no</td>
+
+                                        <td>@item.NamaMenu</td>
+
+                                        <td>@item.TotalTerjual</td>
+
+                                    </tr>
+
+                                    no++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+
+                                    <td colspan="3" class="text-center">
+
+                                        Belum ada data penjualan.
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        const ctx = document.getElementById('salesChart');
+
+        new Chart(ctx, {
+
+        type: 'bar',
+
+        data: {
+
+        labels: ['Hari Ini', 'Bulan Ini'],
+
+        datasets: [{
+
+        label: 'Pendapatan',
+
+        data: [
+        @Model.PendapatanHariIni,
+        @Model.PendapatanBulanIni
+        ]
+
+        }]
+
+        },
+
+        options: {
+
+        responsive: true,
+
+        plugins: {
+
+        legend: {
+
+        display: false
+
+        }
+
+        }
+
+        }
+
+        });
+
+    </script>
+
+}

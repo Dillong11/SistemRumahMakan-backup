@@ -1,0 +1,127 @@
+@model List<SistemRumahMakan.Models.KategoriMenu>
+
+@{
+    ViewData["Title"] = "Kategori Menu";
+}
+
+<div class="container mt-4">
+
+    <partial name="_Alert" />
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h4 class="mb-0">
+                    Master Kategori Menu
+                </h4>
+
+                <a asp-action="Create"
+                   class="btn btn-light">
+                    + Tambah
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="get">
+
+                <div class="row mb-3">
+
+                    <div class="col-md-4">
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="keyword"
+                            placeholder="Cari kategori..." />
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <button class="btn btn-primary">
+
+                            Search
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th width="5%">No</th>
+
+                        <th>Nama Kategori</th>
+
+                        <th>Deskripsi</th>
+
+                        <th width="20%">Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+
+                            <td>@item.NamaKategori</td>
+
+                            <td>@item.Deskripsi</td>
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-warning btn-sm">
+
+                                    Edit
+
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

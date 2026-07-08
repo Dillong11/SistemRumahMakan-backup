@@ -1,0 +1,61 @@
+@model SistemRumahMakan.Models.Meja
+
+@{
+    ViewData["Title"] = "Edit Meja";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h4>Edit Meja</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Nomor Meja
+
+                    </label>
+
+                    <input asp-for="NomorMeja"
+                           class="form-control" />
+
+                    <span asp-validation-for="NomorMeja"
+                          class="text-danger"></span>
+
+                </div>
+            
+
+                <button class="btn btn-success">
+
+                    Update
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Kembali
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}

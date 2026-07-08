@@ -1,0 +1,113 @@
+
+@model SistemRumahMakan.Models.OrderHeader
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Hapus Transaksi";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4>Hapus Transaksi</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="alert alert-warning">
+
+                <h5>Yakin ingin menghapus transaksi ini?</h5>
+
+                <p>
+                    Data yang dihapus tidak dapat dikembalikan.
+                </p>
+
+            </div>
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th width="30%">Nomor Order</th>
+                    <td>@Model.NomorOrder</td>
+                </tr>
+
+                <tr>
+                    <th>Tanggal</th>
+                    <td>@Model.Tanggal.ToString("dd MMM yyyy HH:mm")</td>
+                </tr>
+
+                <tr>
+                    <th>Meja</th>
+                    <td>@Model.Meja?.NomorMeja</td>
+                </tr>
+
+                <tr>
+                    <th>Status</th>
+                    <td>
+
+                        @if (Model.Status == "Proses")
+                        {
+                            <span class="badge bg-warning text-dark">
+                                Proses
+                            </span>
+                        }
+                        else if (Model.Status == "Selesai")
+                        {
+                            <span class="badge bg-success">
+                                Selesai
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">
+                                Batal
+                            </span>
+                        }
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Total</th>
+                    <td>
+
+                        @Model.Total.ToString("C0", new CultureInfo("id-ID"))
+
+                    </td>
+                </tr>
+
+            </table>
+
+            <form asp-action="Delete" method="post">
+
+                @Html.AntiForgeryToken()
+
+                <input asp-for="Id" type="hidden" />
+
+                <button type="submit"
+                        class="btn btn-danger">
+
+                    <i class="bi bi-trash"></i>
+
+                    Hapus
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Kembali
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

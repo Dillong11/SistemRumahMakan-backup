@@ -1,0 +1,42 @@
+@model SistemRumahMakan.Models.OrderHeader
+@using System.Globalization
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+            <h4>Pembayaran</h4>
+        </div>
+
+        <div class="card-body">
+
+            <h5>No Order: @Model.NomorOrder</h5>
+
+            <h5>Total:
+                @Model.Total.ToString("C0", new CultureInfo("id-ID"))
+            </h5>
+
+            <form method="post">
+
+                <input type="hidden" name="id" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label>Uang Bayar</label>
+                    <input type="number"
+                           name="bayar"
+                           class="form-control"
+                           required />
+                </div>
+
+                <button class="btn btn-success">
+                    Proses Pembayaran
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
