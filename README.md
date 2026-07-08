@@ -1,3 +1,5 @@
+[![.NET Build](https://github.com/Dillong11/SistemRumahMakan-backup/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Dillong11/SistemRumahMakan-backup/actions/workflows/dotnet.yml)
+
 SistemRumahMakan
 =================
 
