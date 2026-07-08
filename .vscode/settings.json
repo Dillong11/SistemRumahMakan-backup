@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true
+  },
+  "editor.formatOnSave": true,
+  "omnisharp.useModernNet": true,
+  "csharp.format.enable": true
+}
